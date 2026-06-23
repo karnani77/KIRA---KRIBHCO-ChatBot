@@ -1,0 +1,36 @@
+http://windows.microsoft.com/en-in/windows/lifecycle
+
+
+Client operating systems 	Latest update or service pack 	End of mainstream support 	End of extended support
+
+Windows 7 *			Service Pack 1			January 13, 2015		January 14, 2020
+
+Windows 8			Windows 8.1			January 9, 2018			January 10, 2023
+
+Windows 10, released in July 2015 **
+
+
+http://www.computerworld.com/article/2937825/windows-pcs/with-windows-10-imminent-windows-81-sales-demise-clock-to-start-tickin.html
+
+The impending debut of Windows 10 near the end of next month will start the clock ticking toward a deadline in 2016 when Microsoft will stop selling Windows 8.1 at retail, and a 2017 shut-off of sales of new devices armed with the soon-to-be-forgotten OS.
+
+According to a long-established policy called "end of sales," Microsoft stops shipping an operating system to retailers one year after the launch of the OS's successor, and mandates that OEMs (original equipment manufacturers) stop pre-installing the older edition two years after the successor's release.
+
+
+http://www.zdnet.com/article/microsoft-sets-end-of-sales-date-for-windows-7-pcs/
+
+http://www.zdnet.com/article/microsoft-sets-end-of-sales-date-for-windows-7-pcs/
+
+Client operating systems 	Date of availability 	Retail software End of Sales 	End of Sales of PCs preinstalled
+
+Windows 7 Prof			October 22, 2012	January 13, 2015		October 31, 2016
+
+Windows 8			October 26, 2012	October 31, 2014		June 30, 2016
+
+Windows 8.1			October 18, 2013	September 1, 2015		October 31, 2016
+
+Windows 10, released in July 2015 **
+
+(It's worth noting here that the support lifecycle for Windows 7 isn't changed. All editions of Windows 7 will continue to receive security updates throughout the Extended Support period, which ends on January 14, 2020. Windows 8.1 is still in mainstream support. The Extended Support period begins on January 9, 2018 and runs through January 10, 2023, when Windows 8.1 will no longer be supported.)
+
+

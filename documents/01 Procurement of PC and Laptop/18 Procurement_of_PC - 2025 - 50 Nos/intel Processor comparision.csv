@@ -1,0 +1,123 @@
+﻿Intel® Product Specification Comparison,,
+12/19/2025 03:10:39 PM,,
+ ,Intel® Core™ i5 processor 14500 ,Intel® Core™ Ultra 5 Processor 235 
+Essentials,,
+Product Collection,Intel® Core™ i5 Processors (14th gen),Intel® Core™ Ultra Processors (Series 2)
+Vertical Segment,Desktop,Desktop
+Processor Number,i5-14500,235
+Lithography,Intel 7,
+Overall Peak TOPS (Int8),,27
+Recommended Customer Price,$232.00-$242.00,$247.00-$257.00
+Recommended Customer Price,,
+,,
+CPU Specifications,,
+Total Cores,14,14
+# of Performance-cores,6,6
+# of Efficient-cores,8,8
+Total Threads,20,14
+Max Turbo Frequency,5 GHz,5 GHz
+Performance-core Max Turbo Frequency,5 GHz,5 GHz
+Efficient-core Max Turbo Frequency,3.7 GHz,4.4 GHz
+Performance-core Base Frequency,2.6 GHz,3.4 GHz
+Efficient-core Base Frequency,1.9 GHz,2.9 GHz
+Cache,24 MB Intel® Smart Cache,24 MB Intel® Smart Cache
+Total L2 Cache,11.5 MB,26 MB
+Processor Base Power,65 W,65 W
+Intel® Deep Learning Boost (Intel® DL Boost) on CPU,,Yes
+AI Software Frameworks Supported by CPU,,OpenVINO™ |  WindowsML |  DirectML |  ONNX RT |  WebNN
+CPU Lithography,,TSMC N3B
+,,
+Supplemental Information,,
+Marketing Status,Launched,Launched
+Launch Date,Q1'24,Q1'25
+Embedded Options Available,Yes,No
+Use Conditions,PC/Client/Tablet |  Workstation,PC/Client/Tablet |  Workstation
+,,
+Memory Specifications,,
+Max Memory Size (dependent on memory type),192 GB,256 GB
+Memory Types,Up to DDR5 4800 MT/s Up to DDR4 3200 MT/s,Up to DDR5 6400 MT/s
+Max # of Memory Channels,2,2
+Graphics Max Dynamic Frequency,1.55 GHz,2 GHz
+Graphics Output,eDP 1.4b |  DP 1.4a |  HDMI 2.1,eDP1.4b |  DP 2.1 UHBR20 |  HDMI 2.1 FRL
+Execution Units,32,
+Max Resolution (HDMI)‡,4096 x 2160 @ 60Hz,4096 x 2304 @ 60Hz (HDMI 2.1 TMDS)7680 x 4320 @ 60Hz (HDMI 2.1 FRL)
+Max Resolution (DP)‡,7680 x 4320 @ 60Hz,7680 x 4320 @ 60Hz
+Max Resolution (eDP - Integrated Flat Panel)‡,5120 x 3200 @ 120Hz,3840 x 2400 @ 120Hz
+DirectX* Support,12,12
+OpenGL* Support,4.5,4.5
+OpenCL* Support,3,3
+Multi-Format Codec Engines,2,
+Intel® Quick Sync Video,Yes,Yes
+Intel® Clear Video HD Technology,Yes,
+# of Displays Supported ‡,4,4
+Device ID,0x4680,0x7D67
+Graphics Base Frequency,,300 MHz
+GPU Peak TOPS (Int8),,6
+Xe-cores,,3
+H.264 Hardware Encode/Decode,,Yes
+H.265 (HEVC) Hardware Encode/Decode,,Yes
+AV1 Hardware Encode/Decode,,Yes
+Intel® Deep Learning Boost (Intel® DL Boost) on GPU,,Yes
+AI Software Frameworks Supported by GPU,,OpenVINO™ |  WindowsML |  DirectML |  ONNX RT |  WebGPU
+,,
+Expansion Options,,
+Direct Media Interface (DMI) Revision,4,4
+Max # of DMI Lanes,8,8
+Scalability,1S Only,1S Only
+PCI Express Revision,5.0 and 4.0,5.0 and 4.0
+PCI Express Configurations ‡,Up to 1x16+4 |  2x8+4,Up to 1x16+2x4 |  2x8+2x4 |  1x8+4x4
+Max # of PCI Express Lanes,20,24
+Intel® Thunderbolt™ 4,,Yes
+,,
+Package Specifications,,
+Sockets Supported,FCLGA1700,FCLGA1851
+Max CPU Configuration,1,
+Thermal Solution Specification,PCG 2020C,PCG 2022C
+TJUNCTION,100°C,
+Package Size,45.0 mm x 37.5 mm,45 mm x 37.5 mm
+Max Operating Temperature,100 °C,105 °C
+,,
+Advanced Technologies,,
+Intel® Gaussian & Neural Accelerator,3,3.5
+Intel® Thread Director,Yes,Yes
+Intel® Deep Learning Boost (Intel® DL Boost) on CPU,Yes,
+Intel® Speed Shift Technology,Yes,Yes
+Intel® Turbo Boost Technology ‡,2,2
+Intel® Hyper-Threading Technology ‡,Yes,No
+Intel® 64 ‡,Yes,Yes
+Instruction Set,64-bit,64-bit
+Instruction Set Extensions,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2,Intel® SSE4.1 |  Intel® SSE4.2 |  Intel® AVX2
+Idle States,Yes,Yes
+Enhanced Intel SpeedStep® Technology,Yes,Yes
+Thermal Monitoring Technologies,Yes,Yes
+Intel® Volume Management Device (VMD),Yes,Yes
+,,
+Security & Reliability,,
+Intel vPro® Eligibility ‡,Intel vPro® Enterprise |  Intel vPro® Essentials |  Intel vPro® Platform,Intel vPro® Enterprise
+Intel® Threat Detection Technology (TDT),Yes,Yes
+Intel® Active Management Technology (AMT) ‡,Yes,Yes
+Intel® Standard Manageability (ISM) ‡,Yes,Yes
+Intel® Remote Platform Erase (RPE) ‡,Yes,Yes
+Intel® One-Click Recovery ‡,Yes,Yes
+Intel® Hardware Shield Eligibility ‡,Yes,
+Intel® Secure Key,Yes,Yes
+Intel® Control-Flow Enforcement Technology,Yes,Yes
+Intel® Total Memory Encryption - Multi Key,Yes,Yes
+Intel® AES New Instructions,Yes,Yes
+Intel® OS Guard,Yes,Yes
+Intel® Trusted Execution Technology ‡,Yes,Yes
+Execute Disable Bit ‡,Yes,Yes
+Intel® Boot Guard,Yes,Yes
+Mode-based Execute Control (MBEC),Yes,Yes
+Intel® Stable IT Platform Program (SIPP),Yes,Yes
+Intel® Virtualization Technology with Redirect Protection (VT-rp) ‡,Yes,Yes
+Intel® Virtualization Technology (VT-x) ‡,Yes,Yes
+Intel® Virtualization Technology for Directed I/O (VT-d) ‡,Yes,Yes
+Intel® VT-x with Extended Page Tables (EPT) ‡,Yes,Yes
+,,
+NPU Specifications,,
+NPU Name‡,,Intel® AI Boost
+NPU Peak TOPS (Int8),,13
+Sparsity Support,,Yes
+Windows Studio Effects Support,,Yes
+AI Software Frameworks Supported by NPU,,OpenVINO™ |  WindowsML |  DirectML |  ONNX RT |  WebNN

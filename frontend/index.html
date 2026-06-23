@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRIBHCO AI Knowledge Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>🤖 KRIBHCO AI</h2>
+                <span>Knowledge Platform</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li id="dashboardBtn" class="active">Dashboard</li>
+                <li id="assistantBtn">AI Assistant</li>
+                <li id="documentsBtn">Documents</li>
+                <li id="analyticsBtn">Analytics</li>
+                <li id="settingsBtn">Settings</li>
+            </ul>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="topbar">
+                <h1>KRIBHCO AI Platform</h1>
+                <p class="subtitle">
+                    Enterprise Knowledge Assistant
+                </p>
+            </header>
+
+            <!-- CARDS -->
+            <section class="cards">
+
+                <div class="card">
+                    <h3>📚 Indexed PDFs</h3>
+                    <p>7</p>
+                </div>
+
+                <div class="card">
+                    <h3>📄 Total Pages</h3>
+                    <p>398</p>
+                </div>
+
+                <div class="card">
+                    <h3>❓ Questions Asked</h3>
+                    <p id="questionCount">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>🟢 System Status</h3>
+                    <p>Active</p>
+                </div>
+
+            </section>
+
+            <!-- AI ASSISTANT -->
+            <section
+                class="chat-container"
+                id="assistantSection"
+            >
+
+                <div class="chat-header">
+                    AI Assistant
+                </div>
+
+                <div
+                    id="chatMessages"
+                    class="chat-messages"
+                >
+
+                    <div class="bot-message">
+                        Welcome to KRIBHCO AI Assistant.
+                    </div>
+
+                    <div class="suggestions">
+
+                        <button onclick="quickAsk('What is KHMS?')">
+                            What is KHMS?
+                        </button>
+
+                        <button onclick="quickAsk('What is KReS?')">
+                            What is KReS?
+                        </button>
+
+                        <button onclick="quickAsk('Summarize Scope of Work')">
+                            Scope of Work
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="chat-input">
+
+                    <input
+                        id="questionInput"
+                        type="text"
+                        placeholder="Ask about KHMS, KReS, e-Seva..."
+                    >
+
+                    <button onclick="sendMessage()">
+                        Send
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- DOCUMENTS -->
+            <section
+                id="documentsSection"
+                class="chat-container"
+                style="display:none;"
+            >
+
+                <div class="chat-header">
+                    Indexed Documents
+                </div>
+
+                <div style="padding:25px;">
+
+                    <p>📄 Business Blueprint - KHMS -V.2.pdf</p>
+                    <br>
+
+                    <p>📄 Business Blueprint - KReS-V.2.pdf</p>
+                    <br>
+
+                    <p>📄 KHMS - User Manual.pdf</p>
+                    <br>
+
+                    <p>📄 KReS - User Manual.pdf</p>
+                    <br>
+
+                    <p>📄 KRIBHCO e-Seva - Code Manual.pdf</p>
+                    <br>
+
+                    <p>📄 Kribhco Hospital Management System - Code Manual.pdf</p>
+                    <br>
+
+                    <p>📄 Scope of Work.pdf</p>
+
+                </div>
+
+            </section>
+
+            <!-- ANALYTICS -->
+            <section
+                id="analyticsSection"
+                class="chat-container"
+                style="display:none;"
+            >
+
+                <div class="chat-header">
+                    Analytics
+                </div>
+
+                <div style="padding:25px;">
+
+    <h3>📊 System Analytics</h3>
+
+    <br>
+
+    <canvas
+    id="analyticsChart"
+    style="max-height:350px;"
+></canvas>
+
+</div>
+
+            </section>
+
+            <!-- SETTINGS -->
+            <section
+                id="settingsSection"
+                class="chat-container"
+                style="display:none;"
+            >
+
+                <div class="chat-header">
+                    Settings
+                </div>
+
+                <div style="padding:25px;">
+
+    <h3 style="margin-bottom:25px;">
+        ⚙️ Platform Settings
+    </h3>
+
+    <div class="setting-item">
+        <label>
+            <input type="checkbox" checked>
+            Auto Scroll Chat
+        </label>
+    </div>
+
+    <div class="setting-item">
+        <label>
+            <input type="checkbox" checked>
+            Show Sources
+        </label>
+    </div>
+
+    <div class="setting-item">
+        <label>
+            <input type="checkbox" checked>
+            Enable Suggestions
+        </label>
+    </div>
+
+    <button class="save-btn">
+        Save Settings
+    </button>
+
+</div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

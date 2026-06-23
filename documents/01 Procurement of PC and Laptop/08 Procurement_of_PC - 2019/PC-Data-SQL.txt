@@ -1,0 +1,37 @@
+select * from "TB_HARDWARE_MASTER_HEADER"
+where TB_HARDWARE_MASTER_HEADER.KRIBHCO_HARDWARE = 'Y' and
+deleted <> 'Y'and TB_HARDWARE_MASTER_HEADER.DEVICE_CODE = 'C'
+;
+
+=========================
+
+  SELECT "TB_HARDWARE_MASTER_HEADER"."DEPT_CODE",   
+         "TB_DEPT"."DEPT_NAME",   
+         "TB_HARDWARE_MASTER_HEADER"."MODEL_NAME",   
+         "TB_HARDWARE_MASTER_HEADER"."SYSTEM_NAME",   
+         "TB_DEPT"."DEPT_GRP_CODE",   
+         COUNT("TB_HARDWARE_MASTER_HEADER"."MACHINE_CODE")  
+    FROM "TB_HARDWARE_MASTER_HEADER",   
+         "TB_DEPT"  
+   WHERE ( "TB_HARDWARE_MASTER_HEADER"."DEPT_CODE" = "TB_DEPT"."DEPT_CODE" ) AND 
+         ( ( "TB_DEPT"."DELETED" <> 'Y' ) AND  
+         ( "TB_HARDWARE_MASTER_HEADER"."DELETED" <> 'Y' ) )  
+GROUP BY "TB_HARDWARE_MASTER_HEADER"."DEPT_CODE",   
+         "TB_DEPT"."DEPT_NAME",   
+         "TB_HARDWARE_MASTER_HEADER"."MODEL_NAME",   
+         "TB_HARDWARE_MASTER_HEADER"."SYSTEM_NAME",   
+         "TB_DEPT"."DEPT_GRP_CODE"  
+ORDER BY "TB_HARDWARE_MASTER_HEADER"."DEPT_CODE" ASC,   
+         "TB_HARDWARE_MASTER_HEADER"."MODEL_NAME" ASC   ;
+=======================================================
+select a.machine_code, a.dept_code, b.dept_name, a.nu_pers_num,a.device_code, a.system_name, a.model_name, a.location, a.make, a.ch_remark
+from TB_HARDWARE_MASTER_HEADER a, tb_dept b
+where 
+a.dept_code = b.dept_code and
+a.KRIBHCO_HARDWARE = 'Y' and
+a.deleted <> 'Y'and 
+a.DEVICE_CODE = 'C' and
+(a.stat = 'A' or a.stat = 'W')
+
+
+;
