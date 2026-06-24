@@ -91,7 +91,7 @@ if(analyticsChart){
         analytics.procurement
     ];
 
-    analyticsChart.update();
+    analyticsChart.update('active');
 
 }
 
@@ -385,9 +385,14 @@ if(ctx){
         },
 
         options:{
-            responsive:true,
-            maintainAspectRatio:false
-        }
+    responsive:true,
+    maintainAspectRatio:false,
+
+    animation:{
+        duration:1500,
+        easing:'easeOutBounce'
+    }
+}
 
     });
 

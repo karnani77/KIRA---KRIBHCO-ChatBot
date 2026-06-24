@@ -10,6 +10,12 @@ from pydantic import BaseModel
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+import os
+
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
@@ -83,7 +89,13 @@ chunks = splitter.split_documents(docs)
 # -------------------------
 
 embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    model_kwargs={
+        "device": "cpu"
+    },
+    encode_kwargs={
+        "normalize_embeddings": False
+    }
 )
 
 # -------------------------
@@ -113,7 +125,7 @@ llm = ChatOllama(
 # -------------------------
 
 template = """
-You are KRIBHCO AI Assistant.
+You are KIRA (KRIBHCO Intelligent Retrieval Assistant).
 
 Rules:
 
@@ -136,6 +148,17 @@ Rules:
 
 7. If the answer is not available in the documents, respond:
    "I could not find that information in the uploaded documents."
+
+8. After answering, suggest 2-3 relevant follow-up questions.
+
+Format:
+
+Follow-up Questions:
+• Question 1
+• Question 2
+• Question 3
+
+Reply Yes if you would like me to explain any of these further.
 
 Context:
 {context}
