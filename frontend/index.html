@@ -12,38 +12,40 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-            <div class="logo">
-    <h2>🤖 KIRA</h2>
-    <span>KRIBHCO Intelligent Retrieval Assistant</span>
-</div>
+        <div class="logo">
+            <h2>🤖 KIRA</h2>
+            <span>KRIBHCO Intelligent Retrieval Assistant</span>
+        </div>
 
-            <ul class="nav-menu">
-                <li id="dashboardBtn" class="active">Dashboard</li>
-                <li id="assistantBtn">AI Assistant</li>
-                <li id="documentsBtn">Documents</li>
-                <li id="analyticsBtn">Analytics</li>
-                <li id="settingsBtn">Settings</li>
-            </ul>
+        <ul class="nav-menu">
+            <li id="dashboardBtn" class="active">Dashboard</li>
+            <li id="assistantBtn">AI Assistant</li>
+            <li id="documentsBtn">Documents</li>
+            <li id="analyticsBtn">Analytics</li>
+            <li id="settingsBtn">Settings</li>
+        </ul>
 
-        </aside>
+    </aside>
 
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
 
-            <!-- HEADER -->
-            <header class="topbar">
-                <h1>KIRA</h1>
-                <p class="subtitle">
-    KRIBHCO Intelligent Retrieval Assistant
-</p>
-            </header>
+        <!-- HEADER -->
+        <header class="topbar">
+            <h1>KIRA</h1>
+            <p class="subtitle">
+                KRIBHCO Intelligent Retrieval Assistant
+            </p>
+        </header>
 
-            <!-- CARDS -->
+        <!-- DASHBOARD -->
+        <section id="dashboardSection" class="page-section">
+
             <section class="cards">
 
                 <div class="card">
@@ -68,168 +70,188 @@
 
             </section>
 
-            <!-- AI ASSISTANT -->
-            <section
-                class="chat-container"
-                id="assistantSection"
-            >
+            <div class="dashboard-grid">
 
-                <div class="chat-header">
-    🤖 KIRA
-</div>
-
-                <div
-                    id="chatMessages"
-                    class="chat-messages"
-                >
-
-                    <div class="bot-message">
-    Welcome to KIRA.<br>
-    Your KRIBHCO Intelligent Retrieval Assistant.
-</div>
-
-                    <div class="suggestions">
-
-                        <button onclick="quickAsk('What is KHMS?')">
-                            What is KHMS?
-                        </button>
-
-                        <button onclick="quickAsk('What is KReS?')">
-                            What is KReS?
-                        </button>
-
-                        <button onclick="quickAsk('Summarize Scope of Work')">
-                            Scope of Work
-                        </button>
-
-                    </div>
-
+                <div class="dashboard-card">
+                    <h3>🕒 Recent Activity</h3>
+                    <ul id="recentQuestions"></ul>
                 </div>
 
-                <div class="chat-input">
+                <div class="dashboard-card">
+                    <h3>📊 Top Topics</h3>
+                    <div id="topTopics"></div>
+                </div>
 
-                    <input
-                        id="questionInput"
-                        type="text"
-                        placeholder="Ask KIRA about KHMS, KReS, e-Seva..."
-                    >
+            </div>
 
-                    <button onclick="sendMessage()">
-                        Send
+        </section>
+
+        <!-- AI ASSISTANT -->
+        <section
+            id="assistantSection"
+            class="page-section chat-container"
+            style="display:none;"
+        >
+
+            <div class="chat-header">
+                🤖 KIRA
+            </div>
+
+            <div id="chatMessages" class="chat-messages">
+
+                <div class="bot-message">
+                    Welcome to KIRA.<br>
+                    Your KRIBHCO Intelligent Retrieval Assistant.
+                </div>
+
+                <div class="suggestions">
+
+                    <button onclick="quickAsk('What is KHMS?')">
+                        What is KHMS?
+                    </button>
+
+                    <button onclick="quickAsk('What is KReS?')">
+                        What is KReS?
+                    </button>
+
+                    <button onclick="quickAsk('Summarize Scope of Work')">
+                        Scope of Work
                     </button>
 
                 </div>
 
-            </section>
+            </div>
 
-            <!-- DOCUMENTS -->
-            <section
-                id="documentsSection"
-                class="chat-container"
-                style="display:none;"
-            >
+            <div class="chat-input">
 
-                <div class="chat-header">
-                    Indexed Documents
+                <input
+                    id="questionInput"
+                    type="text"
+                    placeholder="Ask KIRA about KHMS, KReS, e-Seva..."
+                >
+
+                <button onclick="sendMessage()">
+                    Send
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- DOCUMENTS -->
+        <section
+            id="documentsSection"
+            class="page-section chat-container"
+            style="display:none;"
+        >
+
+            <div class="chat-header">
+                Indexed Documents
+            </div>
+
+            <div style="padding:25px;">
+
+                <p>📄 Business Blueprint - KHMS - V.2.pdf</p>
+                <br>
+
+                <p>📄 Business Blueprint - KReS - V.2.pdf</p>
+                <br>
+
+                <p>📄 KHMS - User Manual.pdf</p>
+                <br>
+
+                <p>📄 KReS - User Manual.pdf</p>
+                <br>
+
+                <p>📄 KRIBHCO e-Seva - Code Manual.pdf</p>
+                <br>
+
+                <p>📄 Kribhco Hospital Management System - Code Manual.pdf</p>
+                <br>
+
+                <p>📄 Scope of Work.pdf</p>
+
+            </div>
+
+        </section>
+
+        <!-- ANALYTICS -->
+        <section
+            id="analyticsSection"
+            class="page-section chat-container"
+            style="display:none;"
+        >
+
+            <div class="chat-header">
+                Analytics
+            </div>
+
+            <div style="padding:25px;">
+
+                <h3>📊 System Analytics</h3>
+
+                <br>
+
+                <canvas
+                    id="analyticsChart"
+                    style="max-height:350px;"
+                ></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- SETTINGS -->
+        <section
+            id="settingsSection"
+            class="page-section chat-container"
+            style="display:none;"
+        >
+
+            <div class="chat-header">
+                Settings
+            </div>
+
+            <div style="padding:25px;">
+
+                <h3 style="margin-bottom:25px;">
+                    ⚙️ Platform Settings
+                </h3>
+
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked>
+                        Auto Scroll Chat
+                    </label>
                 </div>
 
-                <div style="padding:25px;">
-
-                    <p>📄 Business Blueprint - KHMS -V.2.pdf</p>
-                    <br>
-
-                    <p>📄 Business Blueprint - KReS-V.2.pdf</p>
-                    <br>
-
-                    <p>📄 KHMS - User Manual.pdf</p>
-                    <br>
-
-                    <p>📄 KReS - User Manual.pdf</p>
-                    <br>
-
-                    <p>📄 KRIBHCO e-Seva - Code Manual.pdf</p>
-                    <br>
-
-                    <p>📄 Kribhco Hospital Management System - Code Manual.pdf</p>
-                    <br>
-
-                    <p>📄 Scope of Work.pdf</p>
-
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked>
+                        Show Sources
+                    </label>
                 </div>
 
-            </section>
-
-            <!-- ANALYTICS -->
-            <section
-                id="analyticsSection"
-                class="chat-container"
-                style="display:none;"
-            >
-
-                <div class="chat-header">
-                    Analytics
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" checked>
+                        Enable Suggestions
+                    </label>
                 </div>
 
-                <div style="padding:25px;">
+                <button class="save-btn">
+                    Save Settings
+                </button>
 
-    <h3>📊 System Analytics</h3>
+            </div>
 
-    <br>
+        </section>
 
-    <canvas
-    id="analyticsChart"
-    style="max-height:350px;"
-></canvas>
+    </main>
 
 </div>
 
-            </section>
-
-            <!-- SETTINGS -->
-            <section
-                id="settingsSection"
-                class="chat-container"
-                style="display:none;"
-            >
-
-                <div class="chat-header">
-                    Settings
-                </div>
-
-                <div style="padding:25px;">
-
-    <h3 style="margin-bottom:25px;">
-        ⚙️ Platform Settings
-    </h3>
-
-    <div class="setting-item">
-        <label>
-            <input type="checkbox" checked>
-            Auto Scroll Chat
-        </label>
-    </div>
-
-    <div class="setting-item">
-        <label>
-            <input type="checkbox" checked>
-            Show Sources
-        </label>
-    </div>
-
-    <div class="setting-item">
-        <label>
-            <input type="checkbox" checked>
-            Enable Suggestions
-        </label>
-    </div>
-
-    <button class="save-btn">
-        Save Settings
-    </button>
-
-</div>
-
-    <script src="js/app.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 

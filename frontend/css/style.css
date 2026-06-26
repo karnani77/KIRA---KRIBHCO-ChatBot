@@ -331,3 +331,131 @@ body{
     opacity: 1;
     transform: translateY(0);
 }
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:25px;
+}
+
+.dashboard-card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.dashboard-card h3{
+    margin-bottom:15px;
+    color:#1e293b;
+}
+
+#recentQuestions{
+    list-style:none;
+    padding:0;
+}
+
+#recentQuestions li{
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+    color:#475569;
+}
+
+.topic-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.topic-name{
+    font-weight:600;
+}
+
+.topic-count{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.page-section {
+    display: none;
+}
+
+#dashboardSection {
+    display: block;
+}
+
+.confidence{
+
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 18px;
+
+}
+
+.high{
+
+    background:#d4edda;
+
+    color:#155724;
+
+}
+
+.medium{
+
+    background:#fff3cd;
+
+    color:#856404;
+
+}
+
+.low{
+
+    background:#f8d7da;
+
+    color:#721c24;
+
+}
+
+.follow-up-btn{
+
+    display:block;
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#eef5ff;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.3s;
+
+    font-size:14px;
+
+}
+
+.follow-up-btn:hover{
+
+    background:#d8eaff;
+
+    transform:translateX(4px);
+
+}

@@ -6,6 +6,7 @@ let questionCount =
 let analytics =
 JSON.parse(
     localStorage.getItem("analytics")
+
 ) || {
 
     khms:0,
@@ -14,6 +15,11 @@ JSON.parse(
     procurement:0,
     other:0
 };
+
+let questionHistory =
+JSON.parse(
+    localStorage.getItem("questionHistory")
+) || [];
 
 function quickAsk(question){
 
@@ -33,6 +39,16 @@ async function sendMessage(){
         document.getElementById("chatMessages");
 
     const question = input.value;
+    questionHistory.unshift(question);
+
+if(questionHistory.length > 5){
+    questionHistory.pop();
+}
+
+localStorage.setItem(
+    "questionHistory",
+    JSON.stringify(questionHistory)
+);
     const q = question.toLowerCase();
 
     if(q.includes("khms")){
@@ -81,6 +97,7 @@ localStorage.setItem(
     "analytics",
     JSON.stringify(analytics)
 );
+updateDashboard();
 
 if(analyticsChart){
 
@@ -125,10 +142,36 @@ if (analyticsCounter) {
     try {
 
     chat.innerHTML += `
-    <div class="bot-message" id="thinking">
-        🤖 Thinking...
-    </div>
-    `;
+<div class="bot-message" id="thinking">
+    🔍 Searching KRIBHCO knowledge base...
+</div>
+`;
+
+const loadingMessages = [
+    "🔍 Searching KRIBHCO knowledge base...",
+    "📄 Reading relevant documents...",
+    "🤖 KIRA is generating your response..."
+];
+
+let loadingIndex = 0;
+
+const loadingAnimation = setInterval(() => {
+
+    const thinking =
+        document.getElementById("thinking");
+
+    if (!thinking) {
+        clearInterval(loadingAnimation);
+        return;
+    }
+
+    loadingIndex =
+        (loadingIndex + 1) % loadingMessages.length;
+
+    thinking.innerHTML =
+        loadingMessages[loadingIndex];
+
+}, 1200);
 
     chat.scrollTop = chat.scrollHeight;
 
@@ -155,23 +198,138 @@ if (analyticsCounter) {
 
             
 
-        chat.innerHTML += `
-    <div class="bot-message">
-        ${data.answer
-    .replace(/\*\*/g,"")
-    .replace(/\n/g,"<br>")
+    const botMessage = document.createElement("div");
+botMessage.className = "bot-message";
+
+chat.appendChild(botMessage);
+
+let fullAnswer = data.answer.replace(/\*\*/g, "");
+
+let mainAnswer = fullAnswer;
+
+let followUps = [];
+
+if(fullAnswer.includes("Follow-up Questions:")){
+
+    const parts =
+        fullAnswer.split("Follow-up Questions:");
+
+    mainAnswer = parts[0].trim();
+
+    let followSection =
+        parts[1];
+
+    if(followSection.includes("Reply:")){
+
+        followSection =
+            followSection.split("Reply:")[0];
+
+    }
+
+    const questions =
+        followSection
+            .split("\n")
+            .filter(line =>
+                line.trim().startsWith("•")
+            );
+
+    followUps =
+        questions.map(q =>
+            q.replace("•","").trim()
+        );
+
 }
 
-        <br><br>
+typeWriter(
+    botMessage,
+    mainAnswer,
+    () => {
 
-        <small>
-            📄 Sources:
-            <br>
-            ${data.sources.join("<br>")}
-        </small>
-    </div>
-`;
+        let confidence = "";
 
+        if(data.answer.includes("I could not find")){
+
+            confidence =
+            `<div class="confidence low">
+                🔴 Information Not Found
+            </div>`;
+
+        }
+        else if(data.sources.length){
+
+            confidence =
+            `<div class="confidence high">
+                🟢 High Confidence
+            </div>`;
+
+        }
+        else{
+
+            confidence =
+            `<div class="confidence medium">
+                🟡 Partial Match
+            </div>`;
+
+        }
+
+        botMessage.insertAdjacentHTML(
+    "afterbegin",
+    confidence + "<br><br>"
+
+);
+        if(followUps.length){
+
+    const title =
+        document.createElement("div");
+
+    title.innerHTML =
+        "<br><b>📌 Suggested Questions</b><br><br>";
+
+    botMessage.appendChild(title);
+
+    followUps.forEach(question => {
+
+        const btn =
+            document.createElement("button");
+
+        btn.className =
+            "follow-up-btn";
+
+        btn.innerText =
+            question;
+
+        btn.onclick = () => {
+
+            quickAsk(question);
+
+        };
+
+        botMessage.appendChild(btn);
+
+    });
+
+}
+        if(data.sources.length){
+
+            const sourceDiv =
+                document.createElement("small");
+
+            sourceDiv.innerHTML =
+                "<br><br>📄 Sources:<br>" +
+                data.sources.join("<br>");
+
+            botMessage.appendChild(sourceDiv);
+
+        }
+
+    }
+
+);
+
+chat.scrollTo({
+    top: chat.scrollHeight,
+    behavior: "smooth"
+});
 chat.scrollTo({
     top: chat.scrollHeight,
     behavior: "smooth"
@@ -205,27 +363,25 @@ function removeActive(){
 
 function hideAllSections(){
 
-    const sections = [
+    document.getElementById(
+        "dashboardSection"
+    ).style.display = "none";
 
-        "assistantSection",
-        "documentsSection",
-        "analyticsSection",
+    document.getElementById(
+        "assistantSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "documentsSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "analyticsSection"
+    ).style.display = "none";
+
+    document.getElementById(
         "settingsSection"
-
-    ];
-
-    sections.forEach(id => {
-
-        const section =
-            document.getElementById(id);
-
-        section.classList.remove(
-            "active-section"
-        );
-
-        section.style.display = "none";
-
-    });
+    ).style.display = "none";
 
 }
 
@@ -326,19 +482,33 @@ document
     hideAllSections();
 
     const section =
-document.getElementById(
-    "settingsSection"
-);
+        document.getElementById("settingsSection");
 
-section.style.display = "flex";
+    section.style.display = "flex";
 
-setTimeout(() => {
+    setTimeout(() => {
+        section.classList.add("active-section");
+    }, 10);
 
-    section.classList.add(
-        "active-section"
-    );
+});
 
-}, 10);
+document
+.getElementById("dashboardBtn")
+.addEventListener("click", function(){
+
+    removeActive();
+    this.classList.add("active");
+
+    hideAllSections();
+
+    const section =
+        document.getElementById("dashboardSection");
+
+    section.style.display = "block";
+
+    setTimeout(() => {
+        section.classList.add("active-section");
+    }, 10);
 
 });
 
@@ -398,4 +568,89 @@ if(ctx){
 
 }
 
+function updateDashboard(){
 
+    const recentList =
+        document.getElementById("recentQuestions");
+
+    if(recentList){
+
+        recentList.innerHTML = "";
+
+        questionHistory.forEach(question => {
+
+            recentList.innerHTML += `
+                <li>${question}</li>
+            `;
+
+        });
+
+    }
+
+    const topTopics =
+        document.getElementById("topTopics");
+
+    if(topTopics){
+
+        topTopics.innerHTML = `
+            <div class="topic-row">
+                <span class="topic-name">KHMS</span>
+                <span class="topic-count">${analytics.khms}</span>
+            </div>
+
+            <div class="topic-row">
+                <span class="topic-name">KReS</span>
+                <span class="topic-count">${analytics.kres}</span>
+            </div>
+
+            <div class="topic-row">
+                <span class="topic-name">e-Seva</span>
+                <span class="topic-count">${analytics.eseva}</span>
+            </div>
+
+            <div class="topic-row">
+                <span class="topic-name">Procurement</span>
+                <span class="topic-count">${analytics.procurement}</span>
+            </div>
+        `;
+    }
+}
+
+updateDashboard();
+
+function typeWriter(element, text, callback) {
+
+    let index = 0;
+
+    function type() {
+
+        if (index < text.length) {
+
+            if (text[index] === "\n") {
+                element.innerHTML += "<br>";
+            } else {
+                element.innerHTML += text[index];
+            }
+
+            index++;
+
+            const chat =
+                document.getElementById("chatMessages");
+
+            chat.scrollTop = chat.scrollHeight;
+
+            setTimeout(type, 10);
+
+        } else {
+
+            if (callback) {
+                callback();
+            }
+
+        }
+
+    }
+
+    type();
+
+}

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import time
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -117,7 +118,7 @@ retriever = vectorstore.as_retriever(
 
 llm = ChatOllama(
     model="llama3.2:3b",
-    temperature=0.2
+    temperature=0
 )
 
 # -------------------------
@@ -129,36 +130,39 @@ You are KIRA (KRIBHCO Intelligent Retrieval Assistant).
 
 Rules:
 
-1. If the user greets you (hello, hi, hey, good morning, good afternoon),
-   respond naturally and professionally.
+1. Answer ONLY using the provided context.
 
-2. If the user asks about KRIBHCO systems, documents, modules, workflows,
-   reports, or processes, answer ONLY using the provided context.
+2. If the user greets you, respond naturally and professionally.
 
-3. Give detailed and professional answers.
+3. Keep answers concise and professional.
+   - Maximum 150 words unless more detail is requested.
+   - Use bullet points only when they improve readability.
 
-4. Use bullet points where appropriate.
+4. If the question is about a system, include (if available):
+   • Purpose
+   • Key Features
+   • Modules
 
-5. If asked about a system, explain:
-   - Purpose
-   - Key Features
-   - Modules (if available)
-
-6. Do not make up information.
-
-7. If the answer is not available in the documents, respond:
+5. Never invent information.
+   If the answer is not found in the documents, reply exactly:
    "I could not find that information in the uploaded documents."
 
-8. After answering, suggest 2-3 relevant follow-up questions.
+6. ALWAYS generate EXACTLY TWO relevant follow-up questions.
 
-Format:
+7. The follow-up questions must:
+   • Be directly related to the answer.
+   • Be complete questions.
+   • Encourage the user to explore the topic further.
+   • Never use placeholders like "Question 1".
+
+8. End EVERY answer using exactly this format:
 
 Follow-up Questions:
-• Question 1
-• Question 2
-• Question 3
+• <Question 1>
+• <Question 2>
 
-Reply Yes if you would like me to explain any of these further.
+Reply:
+Yes, I'd be happy to explain either of these further.
 
 Context:
 {context}
@@ -175,7 +179,10 @@ prompt = PromptTemplate(
 )
 
 def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
+    return "\n\n".join(
+        doc.page_content[:800]
+        for doc in docs
+    )
 
 chain = (
     {
@@ -201,15 +208,36 @@ def root():
 def chat(data: Question):
 
     try:
-        import time
 
-        start = time.time()
+        question = data.question.lower().strip()
+
+        if question in [
+            "hi",
+            "hello",
+            "hey",
+            "good morning",
+            "good afternoon",
+            "good evening"
+        ]:
+
+            return {
+                "answer": "Hello! I'm KIRA, your KRIBHCO Intelligent Retrieval Assistant. How can I help you today?",
+                "sources": []
+            }
+
+        t1 = time.time()
+
+        source_docs = retriever.invoke(data.question)
+
+        print(f"🔍 Retrieval: {time.time() - t1:.2f} sec")
+
+        t2 = time.time()
 
         answer = chain.invoke(data.question)
 
-        print(f"⏱ Total chain time: {time.time() - start:.2f} sec")
+        print(f"🤖 Chain: {time.time() - t2:.2f} sec")
 
-        source_docs = retriever.invoke(data.question)
+        print(f"⏱ Total: {time.time() - t1:.2f} sec")
 
         sources = []
 
@@ -228,6 +256,15 @@ def chat(data: Question):
         return {
             "answer": answer,
             "sources": sources
+        }
+
+    except Exception as e:
+
+        print(e)
+
+        return {
+            "answer": "Something went wrong.",
+            "sources": []
         }
 
     except Exception as e:
